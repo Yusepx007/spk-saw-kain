@@ -37,7 +37,7 @@ class Rekomendasi
     public function getAll(): array
     {
         $stmt = $this->db->query(
-            'SELECT r.id, r.jenis_pakaian, r.tingkat_kenyamanan, r.aktivitas, r.created_at,
+            'SELECT r.id, r.pengguna_id, r.jenis_pakaian, r.tingkat_kenyamanan, r.aktivitas, r.created_at,
                     p.nama AS nama_pengguna, p.username,
                     (SELECT bk.nama_bahan
                      FROM detail_rekomendasi dr
@@ -58,7 +58,7 @@ class Rekomendasi
     public function getByPenggunaId(int $penggunaId): array
     {
         $stmt = $this->db->prepare(
-            'SELECT r.id, r.jenis_pakaian, r.tingkat_kenyamanan, r.aktivitas, r.created_at,
+            'SELECT r.id, r.pengguna_id, r.jenis_pakaian, r.tingkat_kenyamanan, r.aktivitas, r.created_at,
                     (SELECT bk.nama_bahan
                      FROM detail_rekomendasi dr
                      JOIN bahan_kain bk ON dr.bahan_kain_id = bk.id
@@ -107,5 +107,13 @@ class Rekomendasi
         );
         $stmt->execute([$limit]);
         return $stmt->fetchAll();
+    }
+    /**
+     * Hapus satu rekomendasi by ID.
+     */
+    public function delete(int $id): bool
+    {
+        $stmt = $this->db->prepare('DELETE FROM rekomendasi WHERE id = ?');
+        return $stmt->execute([$id]);
     }
 }

@@ -89,7 +89,7 @@ require_once __DIR__ . '/../partials/header.php';
                                     <th>Kenyamanan</th>
                                     <th>Aktivitas</th>
                                     <th>Rekomendasi Terbaik</th>
-                                    <th class="text-center">Detail</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,10 +116,23 @@ require_once __DIR__ . '/../partials/header.php';
                                         <?php endif; ?>
                                     </td>
                                     <td class="text-center">
-                                        <a href="/spk-saw-kain/public/rekomendasi/hasil.php?id=<?= $r['id'] ?>"
-                                           class="btn btn-sm btn-outline-primary">
-                                            <i class="bi bi-eye"></i> Lihat
-                                        </a>
+                                        <div class="d-flex gap-1 justify-content-center">
+                                            <a href="/spk-saw-kain/public/rekomendasi/hasil.php?id=<?= $r['id'] ?>"
+                                               class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye"></i> Lihat
+                                            </a>
+                                            <?php
+                                            $bolehHapus = ($_SESSION['role'] === 'admin')
+                                                       || (int)$r['pengguna_id'] === (int)$_SESSION['pengguna_id'];
+                                            ?>
+                                            <?php if ($bolehHapus): ?>
+                                            <a href="/spk-saw-kain/public/rekomendasi/delete.php?id=<?= $r['id'] ?>"
+                                               class="btn btn-sm btn-outline-danger confirm-delete"
+                                               data-nama="riwayat rekomendasi #<?= $r['id'] ?>">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                            <?php endif; ?>
+                                        </div>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -340,13 +353,24 @@ require_once __DIR__ . '/../partials/header.php';
             </div>
 
             <!-- Aksi -->
-            <div class="d-flex gap-2">
+            <div class="d-flex gap-2 flex-wrap">
                 <a href="/spk-saw-kain/public/rekomendasi/form.php" class="btn btn-primary">
                     <i class="bi bi-magic me-1"></i>Buat Rekomendasi Baru
                 </a>
                 <a href="/spk-saw-kain/public/rekomendasi/hasil.php" class="btn btn-outline-secondary">
                     <i class="bi bi-list-ul me-1"></i>Lihat Semua Riwayat
                 </a>
+                <?php
+                $bolehHapusDetail = ($_SESSION['role'] === 'admin')
+                               || (int)$rekomendasi['pengguna_id'] === (int)$_SESSION['pengguna_id'];
+                ?>
+                <?php if ($bolehHapusDetail): ?>
+                <a href="/spk-saw-kain/public/rekomendasi/delete.php?id=<?= $rekomendasi['id'] ?>&redirect=list"
+                   class="btn btn-outline-danger confirm-delete"
+                   data-nama="riwayat rekomendasi #<?= $rekomendasi['id'] ?>">
+                    <i class="bi bi-trash me-1"></i>Hapus Riwayat Ini
+                </a>
+                <?php endif; ?>
             </div>
 
             <?php endif; // end if $rekomendasi ?>

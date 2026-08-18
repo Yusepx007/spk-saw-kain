@@ -64,4 +64,12 @@ class DetailRekomendasi
         $stmt->execute([$rekomendasiId]);
         return $stmt->fetchAll();
     }
+    /**
+     * Hapus semua detail milik satu rekomendasi.
+     */
+    public function deleteByRekomendasiId(int $rekomendasiId): bool
+    {
+        $stmt = $this->db->prepare('DELETE FROM detail_rekomendasi WHERE rekomendasi_id = ?');
+        return $stmt->execute([$rekomendasiId]);
+    }
 }
