@@ -1,0 +1,37 @@
+# ==================================================
+# .gitignore — SPK SAW Pemilihan Kain
+# ==================================================
+
+# File testing & helper sementara (HAPUS setelah dipakai)
+test_db.php
+test_features.php
+generate_hash.php
+
+# Upload foto desain (tidak perlu di-commit)
+public/assets/img/uploads/*
+!public/assets/img/uploads/.gitkeep
+
+# Konfigurasi lokal (jika ada)
+.env
+*.local.php
+
+# Composer / dependency (tidak ada, tapi untuk jaga-jaga)
+vendor/
+
+# Log error PHP
+*.log
+error_log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# Windows
+[Tt]humbs.db
