@@ -7,10 +7,16 @@ unset($_SESSION['flash_success'], $_SESSION['flash_error']);
 
 <!-- Top Navbar -->
 <nav class="top-navbar">
-    <!-- Mobile toggle -->
-    <button class="sidebar-toggle d-lg-none" id="sidebarToggle" type="button">
-        <i class="bi bi-list"></i>
-    </button>
+    <!-- Mobile toggle + Logo mobile -->
+    <div class="d-flex align-items-center gap-2">
+        <button class="sidebar-toggle d-lg-none" id="sidebarToggle" type="button">
+            <i class="bi bi-list"></i>
+        </button>
+        <img src="/spk-saw-kain/public/assets/img/logo.png"
+             alt="Logo"
+             class="d-lg-none"
+             style="width:28px;height:28px;object-fit:contain;border-radius:6px;">
+    </div>
 
     <!-- Page Title -->
     <div class="navbar-title">

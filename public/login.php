@@ -60,7 +60,9 @@ $csrfToken = AuthGuard::generateCsrfToken();
     <div class="login-card">
         <!-- Logo -->
         <div class="login-logo">
-            <i class="bi bi-scissors"></i>
+            <img src="/spk-saw-kain/public/assets/img/logo.png"
+                 alt="Logo SPK Kain"
+                 style="width:80px;height:80px;object-fit:contain;border-radius:16px;">
         </div>
 
         <h1 class="login-title">SPK Pemilihan Kain</h1>

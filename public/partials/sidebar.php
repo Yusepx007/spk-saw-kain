@@ -14,8 +14,10 @@ $role = $_SESSION['role'] ?? 'pengguna';
 <nav id="sidebar" class="sidebar d-flex flex-column">
     <!-- Brand -->
     <div class="sidebar-brand">
-        <div class="brand-icon">
-            <i class="bi bi-scissors"></i>
+        <div class="brand-icon" style="background:transparent;padding:0;">
+            <img src="/spk-saw-kain/public/assets/img/logo.png"
+                 alt="Logo SPK Kain"
+                 style="width:40px;height:40px;object-fit:contain;border-radius:8px;">
         </div>
         <div class="brand-text">
             <span class="brand-title">SPK Kain</span>
