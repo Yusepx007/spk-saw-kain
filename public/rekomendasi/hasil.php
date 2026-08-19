@@ -185,7 +185,6 @@ require_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="mt-2 text-muted" style="font-size:12px;">
                         <i class="bi bi-clock me-1"></i>
-                        <?= date('d MMMM Y H:i', strtotime($rekomendasi['created_at'])) ?>
                         <?= date('d/m/Y H:i', strtotime($rekomendasi['created_at'])) ?>
                     </div>
                 </div>
