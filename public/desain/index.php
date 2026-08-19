@@ -65,9 +65,16 @@ require_once __DIR__ . '/../partials/header.php';
                                 <tr>
                                     <td><?= $i + 1 ?></td>
                                     <td>
-                                        <?php if ($d['foto'] && file_exists(__DIR__ . '/../assets/img/uploads/' . $d['foto'])): ?>
-                                        <img
-                                            src="/spk-saw-kain/public/assets/img/uploads/<?= htmlspecialchars($d['foto']) ?>"
+                                        <?php
+                                        $fotoSrc = '';
+                                        if ($d['foto']) {
+                                            $fotoSrc = str_contains($d['foto'], '/')
+                                                ? '/spk-saw-kain/public/assets/img/' . $d['foto']
+                                                : '/spk-saw-kain/public/assets/img/uploads/' . $d['foto'];
+                                        }
+                                        ?>
+                                        <?php if ($fotoSrc): ?>
+                                        <img src="<?= htmlspecialchars($fotoSrc) ?>"
                                             class="desain-foto"
                                             alt="<?= htmlspecialchars($d['nama_desain']) ?>"
                                         >

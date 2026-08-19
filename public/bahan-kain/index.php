@@ -54,6 +54,7 @@ require_once __DIR__ . '/../partials/header.php';
                             <thead>
                                 <tr>
                                     <th>No.</th>
+                                    <th>Foto</th>
                                     <th>Nama Bahan</th>
                                     <?php foreach ($kriteriaList as $k): ?>
                                     <th class="text-center" title="Bobot: <?= $k['bobot'] ?> | <?= $k['atribut'] ?>">
@@ -73,6 +74,18 @@ require_once __DIR__ . '/../partials/header.php';
                                 ?>
                                 <tr>
                                     <td><?= $i + 1 ?></td>
+                                    <td>
+                                        <?php $fotoPath = '/spk-saw-kain/public/assets/img/' . ($b['foto'] ?? ''); ?>
+                                        <?php if ($b['foto']): ?>
+                                        <img src="<?= htmlspecialchars($fotoPath) ?>"
+                                             alt="<?= htmlspecialchars($b['nama_bahan']) ?>"
+                                             style="width:52px;height:52px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;">
+                                        <?php else: ?>
+                                        <div style="width:52px;height:52px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;">
+                                            <i class="bi bi-image text-muted"></i>
+                                        </div>
+                                        <?php endif; ?>
+                                    </td>
                                     <td class="fw-600"><?= htmlspecialchars($b['nama_bahan']) ?></td>
                                     <?php foreach ($kriteriaList as $k): ?>
                                     <td class="text-center">

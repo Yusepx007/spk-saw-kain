@@ -244,8 +244,21 @@ require_once __DIR__ . '/../partials/header.php';
                                     <td>
                                         <?php if ($d['nama_desain']): ?>
                                         <div class="d-flex align-items-center gap-2">
-                                            <?php if ($d['foto'] && file_exists(__DIR__ . '/../assets/img/uploads/' . $d['foto'])): ?>
-                                            <img src="/spk-saw-kain/public/assets/img/uploads/<?= htmlspecialchars($d['foto']) ?>"
+                                            <?php
+                                        // Support 2 format: path relatif ke img/ ATAU nama file di uploads/
+                                        $fotoSrc = '';
+                                        if ($d['foto']) {
+                                            if (str_contains($d['foto'], '/')) {
+                                                // Path relatif: Desain/xxx.jpg atau Kain/xxx.jpg
+                                                $fotoSrc = '/spk-saw-kain/public/assets/img/' . $d['foto'];
+                                            } else {
+                                                // Nama file saja → di uploads/
+                                                $fotoSrc = '/spk-saw-kain/public/assets/img/uploads/' . $d['foto'];
+                                            }
+                                        }
+                                        ?>
+                                        <?php if ($fotoSrc): ?>
+                                        <img src="<?= htmlspecialchars($fotoSrc) ?>"
                                                  class="desain-foto" style="width:36px;height:36px;"
                                                  alt="<?= htmlspecialchars($d['nama_desain']) ?>">
                                             <?php endif; ?>

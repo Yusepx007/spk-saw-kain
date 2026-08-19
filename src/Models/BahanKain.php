@@ -23,7 +23,7 @@ class BahanKain
     public function getAll(): array
     {
         $stmt = $this->db->query(
-            'SELECT id, nama_bahan, created_at FROM bahan_kain ORDER BY nama_bahan'
+            'SELECT id, nama_bahan, foto, created_at FROM bahan_kain ORDER BY nama_bahan'
         );
         return $stmt->fetchAll();
     }
@@ -68,20 +68,20 @@ class BahanKain
     /**
      * Buat bahan kain baru (nama saja; nilai diinsert lewat NilaiBahan).
      */
-    public function create(string $namaBahan): int
+    public function create(string $namaBahan, string $foto = ''): int
     {
-        $stmt = $this->db->prepare('INSERT INTO bahan_kain (nama_bahan) VALUES (?)');
-        $stmt->execute([$namaBahan]);
+        $stmt = $this->db->prepare('INSERT INTO bahan_kain (nama_bahan, foto) VALUES (?, ?)');
+        $stmt->execute([$namaBahan, $foto ?: null]);
         return (int) $this->db->lastInsertId();
     }
 
     /**
      * Update nama bahan kain.
      */
-    public function update(int $id, string $namaBahan): bool
+    public function update(int $id, string $namaBahan, string $foto = ''): bool
     {
-        $stmt = $this->db->prepare('UPDATE bahan_kain SET nama_bahan = ? WHERE id = ?');
-        return $stmt->execute([$namaBahan, $id]);
+        $stmt = $this->db->prepare('UPDATE bahan_kain SET nama_bahan = ?, foto = ? WHERE id = ?');
+        return $stmt->execute([$namaBahan, $foto ?: null, $id]);
     }
 
     /**

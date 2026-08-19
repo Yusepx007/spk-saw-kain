@@ -6,25 +6,25 @@
 USE `spk_saw_kain`;
 
 -- --------------------------------------------------------
--- Akun Admin Default
--- password: admin123 (bcrypt hash)
--- WAJIB DIGANTI SETELAH INSTALASI!
+-- Akun Pengguna (Dataset User sesuai skripsi)
 -- --------------------------------------------------------
--- Password: admin  → admin123
--- Password: user   → user123
+-- Admin    → Admin/Admin123
+-- Penjahit → masing-masing password sesuai dataset
 INSERT INTO `pengguna` (`nama`, `username`, `password`, `role`) VALUES
-('Administrator', 'admin', '$2y$12$CgdD.uqLi8O2ZpdHdMJfwuo/9O4RW2LHjC/ZfLEwNQGmDnvWlYnHW', 'admin'),
-('Pengguna Demo',  'user',  '$2y$12$Rmx7u.jiIvhhIKTmxSrBYuKYFIIwLnmS9/Aud5itAHlcH3dc5gJNS', 'pengguna');
+('Administrator', 'Admin',       '$2y$10$m6KanqXxZzXM8Gp2r/IcTugfn.36GOrStpWKg.9eMLkd32yOegkqi', 'admin'),
+('Dedi Suhendi',  'dedisuhendi', '$2y$10$KeorbwOeNUUC.TLaxrHdK.UW/TcxW3of9JCIVbCeBklA1KrrVhjn6', 'pengguna'),
+('Nisa Amelia',   'nisaamelia',  '$2y$10$5cBEWCDGN6YIVWZOKKJWzuBBc39OqxeEs9/KNycHhAq6RkeWAJIRi', 'pengguna'),
+('Karin Sri',     'karinsri',    '$2y$10$FpjX5oOT4szkkOoOSylvO.qGWxSoKMwasHf3EeGpUkTX9MWX1kMLi', 'pengguna');
 
 -- --------------------------------------------------------
--- Bahan Kain (5 bahan sesuai PRD §5)
+-- Bahan Kain (5 bahan + foto)
 -- --------------------------------------------------------
-INSERT INTO `bahan_kain` (`nama_bahan`) VALUES
-('Rayon'),
-('Katun'),
-('Linen'),
-('Flannel'),
-('Jersey');
+INSERT INTO `bahan_kain` (`nama_bahan`, `foto`) VALUES
+('Rayon',   'Kain/kain_rayon.jpg.jpeg'),
+('Katun',   'Kain/kain_katun.jpg.jpeg'),
+('Linen',   'Kain/kainLinen.jpg.jpeg'),
+('Flannel', 'Kain/kain_flannel.jpg.jpeg'),
+('Jersey',  'Kain/KainJersey.jpg.jpeg');
 
 -- --------------------------------------------------------
 -- Kriteria (5 kriteria, bobot sesuai PRD §5)
@@ -57,15 +57,15 @@ INSERT INTO `nilai_bahan` (`bahan_kain_id`, `kriteria_id`, `nilai`) VALUES
 (5, 1, 4.25), (5, 2, 3.00), (5, 3, 3.25), (5, 4, 3.75), (5, 5, 3.25);
 
 -- --------------------------------------------------------
--- Contoh Data Desain Awal
+-- Desain Pakaian + foto (sesuai folder img/Desain/)
 -- --------------------------------------------------------
-INSERT INTO `desain` (`nama_desain`, `kategori`) VALUES
-('Kemeja Polos',       'Atasan'),
-('Blouse Casual',      'Atasan'),
-('Kaos Polos',         'Atasan'),
-('Celana Chino',       'Bawahan'),
-('Rok A-Line',         'Bawahan'),
-('Celana Jeans',       'Bawahan'),
-('Gamis Sederhana',    'Terusan'),
-('Dress Casual',       'Terusan'),
-('Jumpsuit Santai',    'Terusan');
+INSERT INTO `desain` (`nama_desain`, `kategori`, `foto`) VALUES
+('Kemeja Polos',    'Atasan',  'Desain/kemeja_polos.jpg.jpeg'),
+('Blouse Casual',   'Atasan',  'Desain/kaos_polos.jpg.jpeg'),
+('Kaos Polos',      'Atasan',  'Desain/kaos_polos.jpg.jpeg'),
+('Celana Chino',    'Bawahan', 'Desain/celana_chino.jpg.jpeg'),
+('Rok A-Line',      'Bawahan', 'Desain/rok a line.jpg.jpeg'),
+('Celana Jeans',    'Bawahan', 'Desain/celana_jeans.jpg.jpeg'),
+('Gamis Sederhana', 'Terusan', 'Desain/gamis_sederhana.jpg.jpeg'),
+('Dress Casual',    'Terusan', 'Desain/dress_casual.jpg.jpeg'),
+('Jumpsuit Santai', 'Terusan', 'Desain/jumpsuit_santai.jpg.jpeg');
