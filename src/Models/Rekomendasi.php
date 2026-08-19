@@ -90,10 +90,13 @@ class Rekomendasi
     /**
      * Ambil rekomendasi terbaru untuk dashboard (N baris).
      */
-    public function getRecent(int $limit = 5): array
+    public function getRecent(int $limit = 5, ?int $penggunaId = null): array
     {
+        $where = $penggunaId ? 'WHERE r.pengguna_id = ?' : '';
+        $params = $penggunaId ? [$penggunaId, $limit] : [$limit];
+
         $stmt = $this->db->prepare(
-            'SELECT r.id, r.jenis_pakaian, r.tingkat_kenyamanan, r.aktivitas, r.created_at,
+            "SELECT r.id, r.jenis_pakaian, r.tingkat_kenyamanan, r.aktivitas, r.created_at,
                     p.nama AS nama_pengguna,
                     (SELECT bk.nama_bahan
                      FROM detail_rekomendasi dr
@@ -102,10 +105,11 @@ class Rekomendasi
                      LIMIT 1) AS top_bahan
              FROM rekomendasi r
              JOIN pengguna p ON r.pengguna_id = p.id
+             {$where}
              ORDER BY r.created_at DESC
-             LIMIT ?'
+             LIMIT ?"
         );
-        $stmt->execute([$limit]);
+        $stmt->execute($params);
         return $stmt->fetchAll();
     }
     /**

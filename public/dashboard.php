@@ -22,7 +22,9 @@ $jmlDesain    = $modelDesain->count();
 $jmlBahan     = $modelBahan->count();
 $jmlKriteria  = $modelKriteria->count();
 $totalBobot   = $modelKriteria->getTotalBobot();
-$recentRek    = $modelRek->getRecent(5);
+$isAdmin     = $_SESSION['role'] === 'admin';
+$filterUser  = $isAdmin ? null : (int)$_SESSION['pengguna_id'];
+$recentRek   = $modelRek->getRecent(5, $filterUser);
 
 require_once __DIR__ . '/partials/header.php';
 ?>
