@@ -230,7 +230,10 @@ require_once __DIR__ . '/../partials/header.php';
                                 <tr class="<?= $rank === 1 ? 'rank-1' : '' ?>">
                                     <td class="text-center">
                                         <div class="rank-badge <?= $rankClass ?>">
-                                            <?= $rank === 1 ? '🥇' : ($rank === 2 ? '🥈' : ($rank === 3 ? '🥉' : $rank)) ?>
+                                            <?php if ($rank === 1): ?><i class="bi bi-trophy-fill" style="color:#f59e0b;"></i>
+                                            <?php elseif ($rank === 2): ?><i class="bi bi-medal-fill" style="color:#94a3b8;"></i>
+                                            <?php elseif ($rank === 3): ?><i class="bi bi-medal-fill" style="color:#b45309;"></i>
+                                            <?php else: ?><?= $rank ?><?php endif; ?>
                                         </div>
                                         <?php if ($rank === 1): ?>
                                         <div class="mt-1">
@@ -447,7 +450,7 @@ require_once __DIR__ . '/../partials/header.php';
                         <div class="flex-grow-1">
                             <div class="d-flex align-items-center gap-2 mb-1">
                                 <h5 class="mb-0 fw-700" style="color:var(--color-primary);">
-                                    🏆 Rekomendasi Terbaik: <?= htmlspecialchars($top['nama_bahan']) ?>
+                                    <i class="bi bi-trophy-fill me-1" style="color:#f59e0b;"></i> Rekomendasi Terbaik: <?= htmlspecialchars($top['nama_bahan']) ?>
                                 </h5>
                                 <span class="badge bg-warning text-dark">Vi = <?= number_format($top['nilai_preferensi'], 4) ?></span>
                             </div>
@@ -489,19 +492,52 @@ require_once __DIR__ . '/../partials/header.php';
                             if (!$desc) continue;
                         ?>
                         <div class="col-md-6">
-                            <div class="d-flex gap-3 p-3 rounded-3 h-100"
+                            <div class="rounded-3 h-100 overflow-hidden"
                                  style="background:<?= $rank === 1 ? 'linear-gradient(135deg,#fefce8,#fef9c3)' : '#f8fafc' ?>;
                                         border:1px solid <?= $rank === 1 ? '#fde68a' : '#e2e8f0' ?>;">
-                                <div style="width:40px;height:40px;border-radius:10px;background:var(--color-<?= $desc['color'] === 'primary' ? 'primary' : ($desc['color'] === 'success' ? 'success' : ($desc['color'] === 'info' ? 'info' : ($desc['color'] === 'warning' ? 'warning' : 'danger'))) ?>);display:flex;align-items:center;justify-content:center;flex-shrink:0;opacity:.85;">
-                                    <i class="bi <?= $desc['icon'] ?> text-white"></i>
-                                </div>
-                                <div>
-                                    <div class="fw-700" style="font-size:14px;">
-                                        <?php if ($rank === 1): ?>🏆 <?php elseif ($rank === 2): ?>🥈 <?php elseif ($rank === 3): ?>🥉 <?php else: ?>#<?= $rank ?> <?php endif; ?>
-                                        <?= htmlspecialchars($nama) ?>
-                                        <span class="badge bg-light text-secondary border ms-1" style="font-size:10px;">
-                                            <?= htmlspecialchars($desc['singkat']) ?>
+                                <?php
+                                $fotoKainCard = '';
+                                if (!empty($d['foto_kain'])) {
+                                    $fotoKainCard = str_contains($d['foto_kain'], '/')
+                                        ? '/spk-saw-kain/public/assets/img/' . $d['foto_kain']
+                                        : '/spk-saw-kain/public/assets/img/uploads/' . $d['foto_kain'];
+                                }
+                                ?>
+                                <?php if ($fotoKainCard): ?>
+                                <div style="width:100%;height:120px;overflow:hidden;position:relative;">
+                                    <img src="<?= htmlspecialchars($fotoKainCard) ?>"
+                                         alt="<?= htmlspecialchars($nama) ?>"
+                                         style="width:100%;height:100%;object-fit:cover;">
+                                    <div style="position:absolute;top:8px;left:8px;">
+                                        <span class="badge" style="background:rgba(0,0,0,0.55);font-size:11px;">
+                                            <?php if ($rank === 1): ?><i class="bi bi-trophy-fill me-1" style="color:#f59e0b;"></i>
+                                            <?php elseif ($rank === 2): ?><i class="bi bi-medal-fill me-1" style="color:#cbd5e1;"></i>
+                                            <?php elseif ($rank === 3): ?><i class="bi bi-medal-fill me-1" style="color:#d97706;"></i>
+                                            <?php else: ?>#<?= $rank ?> <?php endif; ?>
+                                            <?= htmlspecialchars($nama) ?>
                                         </span>
+                                    </div>
+                                </div>
+                                <?php endif; ?>
+                                <div class="p-3">
+                                    <div class="d-flex align-items-center gap-2 mb-1">
+                                        <?php if (!$fotoKainCard): ?>
+                                        <div style="width:36px;height:36px;border-radius:8px;background:var(--color-<?= $desc['color'] ?>);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                            <i class="bi <?= $desc['icon'] ?> text-white"></i>
+                                        </div>
+                                        <?php endif; ?>
+                                        <div>
+                                            <div class="fw-700" style="font-size:14px;">
+                                                <?php if ($rank === 1): ?><i class="bi bi-trophy-fill me-1" style="color:#f59e0b;"></i>
+                                                <?php elseif ($rank === 2): ?><i class="bi bi-2-circle-fill me-1" style="color:#94a3b8;"></i>
+                                                <?php elseif ($rank === 3): ?><i class="bi bi-3-circle-fill me-1" style="color:#b45309;"></i>
+                                                <?php else: ?><i class="bi bi-hash"></i><?= $rank ?> <?php endif; ?>
+                                                <?= htmlspecialchars($nama) ?>
+                                                <span class="badge bg-light text-secondary border ms-1" style="font-size:10px;">
+                                                    <?= htmlspecialchars($desc['singkat']) ?>
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <p class="mb-0 mt-1" style="font-size:12px;color:#4b5563;line-height:1.6;">
                                         <?= htmlspecialchars($desc['panjang']) ?>
