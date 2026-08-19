@@ -238,8 +238,27 @@ require_once __DIR__ . '/../partials/header.php';
                                         </div>
                                         <?php endif; ?>
                                     </td>
-                                    <td class="fw-700" style="font-size:15px;">
-                                        <?= htmlspecialchars($d['nama_bahan']) ?>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <?php
+                                            $fotoKainSrc = '';
+                                            if (!empty($d['foto_kain'])) {
+                                                $fotoKainSrc = str_contains($d['foto_kain'], '/')
+                                                    ? '/spk-saw-kain/public/assets/img/' . $d['foto_kain']
+                                                    : '/spk-saw-kain/public/assets/img/uploads/' . $d['foto_kain'];
+                                            }
+                                            ?>
+                                            <?php if ($fotoKainSrc): ?>
+                                            <img src="<?= htmlspecialchars($fotoKainSrc) ?>"
+                                                 alt="<?= htmlspecialchars($d['nama_bahan']) ?>"
+                                                 style="width:44px;height:44px;object-fit:cover;border-radius:8px;border:2px solid <?= $rank===1 ? '#f59e0b' : '#e2e8f0' ?>;flex-shrink:0;">
+                                            <?php else: ?>
+                                            <div style="width:44px;height:44px;border-radius:8px;background:#f1f5f9;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                                <i class="bi bi-image text-muted" style="font-size:18px;"></i>
+                                            </div>
+                                            <?php endif; ?>
+                                            <span class="fw-700" style="font-size:15px;"><?= htmlspecialchars($d['nama_bahan']) ?></span>
+                                        </div>
                                     </td>
                                     <td>
                                         <?php if ($d['nama_desain']): ?>

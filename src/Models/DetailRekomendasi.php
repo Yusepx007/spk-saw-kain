@@ -53,7 +53,7 @@ class DetailRekomendasi
     {
         $stmt = $this->db->prepare(
             'SELECT dr.peringkat, dr.nilai_preferensi,
-                    bk.nama_bahan,
+                    bk.nama_bahan, bk.foto AS foto_kain,
                     d.nama_desain, d.kategori, d.foto
              FROM detail_rekomendasi dr
              JOIN bahan_kain bk ON dr.bahan_kain_id = bk.id
