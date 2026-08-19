@@ -12,9 +12,9 @@ class Database
 {
     private static ?PDO $instance = null;
 
-    // Konfigurasi koneksi — MySQL berjalan di 127.0.0.1:3307
+    // Konfigurasi koneksi — MySQL berjalan di 127.0.0.1:3306
     private static string $host     = '127.0.0.1';
-    private static int    $port     = 3307;
+    private static int    $port     = 3306;
     private static string $dbname   = 'spk_saw_kain';
     private static string $username = 'root';
     private static string $password = '';
